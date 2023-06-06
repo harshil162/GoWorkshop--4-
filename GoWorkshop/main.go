@@ -48,30 +48,45 @@ func main() {
 	// Replace with the path to your service account credentials JSON file
 	credentialsPath := "/path/to/service_account_credentials.json"
 
-	// Create a context and read the service account credentials file
-	ctx := context.Background()
-	credentials, err := google.CredentialsFromFile(ctx, credentialsPath, sheets.DriveScope)
+	// Read the service account credentials file
+	credentials, err := ioutil.ReadFile(credentialsPath)
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
 
-	// Create a client for the Google Sheets API
-	client, err := sheets.NewService(ctx, credentials)
+	// Create a Config from the JSON credentials
+	config, err := google.JWTConfigFromJSON(credentials, sheets.SpreadsheetsScope)
 	if err != nil {
-		log.Fatalf("Unable to create Google Sheets client: %v", err)
+		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
 
+	// Create a client for the Google Sheets API
+	client := config.Client(context.Background())
+
+	// Replace with the ID of your Google Sheet
 	spreadsheetID := "1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0"
-	sheetName := "Music Downloader Sheet"
+
+	// Replace with the name or range of the sheet you want to retrieve data from
+	sheetName := "Sheet1"
 
 	// Make the API call to retrieve data from the sheet
-	resp, err := client.Spreadsheets.Values.Get(spreadsheetID, sheetName).Do()
+	resp, err := client.Get(fmt.Sprintf("https://sheets.googleapis.com/v4/spreadsheets/%s/values/%s", spreadsheetID, sheetName))
 	if err != nil {
 		log.Fatalf("Unable to retrieve data from sheet: %v", err)
 	}
+	defer resp.Body.Close()
+
+	// Read the response body
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("Unable to read response body: %v", err)
+	}
+
+	// Print the response data
+	fmt.Println(string(data))
 
 	// Process the response and print the data
-	if len(resp.Values) == 0 {
+	/*if len(resp.Values) == 0 {
 		fmt.Println("No data found.")
 	} else {
 		fmt.Println("Data:")
@@ -81,7 +96,7 @@ func main() {
 			}
 			fmt.Println()
 		}
-	}
+	}*/
 	startUpdateTimer()
 
 	log.Println(http.ListenAndServe(":"+strconv.Itoa(3000), nil))

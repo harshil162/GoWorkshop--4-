@@ -24,6 +24,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="items.js"></script>
 </body>
+<script>
+    var msg = document.getElementByID("message")
+    var button = document.getElementByID("button")
+    var textBox = document.getElementByID("textbox")
+    button.addEventListener("click", function() {
+        var str = textBox.value;
+            console.log(str);
+            msg.innerHTML += "<p>" + str + "</p>";
+        });
+  
+        textBox.addEventListener("keyup", function (event) {
+  
+            // Checking if key pressed is ENTER or not
+            // if the key pressed is ENTER
+            // click listener on button is called
+            if (event.keyCode == 13) {
+                button.click();
+            }
+        });
+</script>
 <div class="topnav">
     <input type="text" placeholder="Search..">
 </div>
