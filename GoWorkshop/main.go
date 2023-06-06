@@ -67,10 +67,10 @@ func main() {
 	spreadsheetID := "1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0"
 
 	// Replace with the name or range of the sheet you want to retrieve data from
-	sheetName := "Sheet1"
+	sheetName := "MusicDownloaderSheet"
 
 	// Make the API call to retrieve data from the sheet
-	resp, err := client.Get(fmt.Sprintf("https://sheets.googleapis.com/v4/spreadsheets/%s/values/%s", spreadsheetID, sheetName))
+	resp, err := client.Get(fmt.Sprintf("https://docs.google.com/spreadsheets/d/1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0", spreadsheetID, sheetName))
 	if err != nil {
 		log.Fatalf("Unable to retrieve data from sheet: %v", err)
 	}
