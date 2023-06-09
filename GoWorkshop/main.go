@@ -7,45 +7,52 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 	"time"
 
-	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/sheets/v4"
 )
 
 var items []Item
 
-func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...string) (*oauth2.Config, error) {
-	// Read the service account credentials file
-	credentialsFile, err := os.Open(credentialsPath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open credentials file: %v", err)
-	}
-	defer credentialsFile.Close()
-
-	// Parse the JSON credentials file
-	credentialsJSON, err := ioutil.ReadAll(credentialsFile)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read credentials file: %v", err)
-	}
-
-	// Create a Config from the JSON credentials
-	config, err := google.ConfigFromJSON(credentialsJSON, scopes...)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse credentials: %v", err)
-	}
-
-	return config, nil
+// Struct for JSON response
+type Response struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+	Items   []Item `json:"data"`
 }
+
+/*
+	func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...string) (*oauth2.Config, error) {
+		// Read the service account credentials file
+		credentialsFile, err := os.Open(credentialsPath)
+		if err != nil {
+			return nil, fmt.Errorf("failed to open credentials file: %v", err)
+		}
+		defer credentialsFile.Close()
+
+		// Parse the JSON credentials file
+		credentialsJSON, err := ioutil.ReadAll(credentialsFile)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read credentials file: %v", err)
+		}
+
+		// Create a Config from the JSON credentials
+		config, err := google.ConfigFromJSON(credentialsJSON, scopes...)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse credentials: %v", err)
+		}
+		return config, nil
+	}
+*/
 func main() {
+
 	fileServer := http.FileServer(http.Dir("www/"))
 	http.HandleFunc("/", fileServer.ServeHTTP)
-
 	http.HandleFunc("/Items", getItemsHandler)
-	// Replace with the path to your service account credentials JSON file
+	http.ListenAndServe(":8080", nil)
+	// Replace with the path to your service account credentials JSON file (to-do)
 	credentialsPath := "/path/to/service_account_credentials.json"
 
 	// Read the service account credentials file
@@ -70,7 +77,8 @@ func main() {
 	sheetName := "MusicDownloaderSheet"
 
 	// Make the API call to retrieve data from the sheet
-	resp, err := client.Get(fmt.Sprintf("https://docs.google.com/spreadsheets/d/1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0", spreadsheetID, sheetName))
+	//resp, err := client.Get(fmt.Sprintf("https://docs.google.com/spreadsheets/d/1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0", spreadsheetID, sheetName))
+	resp, err := client.Get(fmt.Sprintf("https://sheets.googleapis.com/v4/spreadsheets/%s/values/%s", spreadsheetID, sheetName))
 	if err != nil {
 		log.Fatalf("Unable to retrieve data from sheet: %v", err)
 	}
@@ -88,7 +96,7 @@ func main() {
 	// Process the response and print the data
 	/*if len(resp.Values) == 0 {
 		fmt.Println("No data found.")
-	} else {
+	} else if len(resp.Values) > 0 {
 		fmt.Println("Data:")
 		for _, row := range resp.Values {
 			for _, cell := range row {
@@ -100,6 +108,9 @@ func main() {
 	startUpdateTimer()
 
 	log.Println(http.ListenAndServe(":"+strconv.Itoa(3000), nil))
+	//Start the HTTP server on localhost:8080
+	//log.Println("Server is running on port 8080")
+	//log.Println(http.ListenAndServe(":8080", nil))
 }
 
 func jsonResponse(w http.ResponseWriter, x interface{}) {
@@ -129,4 +140,9 @@ func startUpdateTimer() {
 			items = getItems()
 		}
 	}()
+}
+func getSong(client *http.Client, spreadsheetID, sheetName string) {
+	//Create a new Google Sheets service
+
+	//Construct the range for retrieving the data from the sheet
 }
