@@ -10,6 +10,8 @@ import (
 	"strconv"
 	"time"
 
+	//"github.com/google/uuid"
+	"github.com/gorilla/mux"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/sheets/v4"
 )
@@ -18,6 +20,7 @@ var items []Item
 
 // Struct for JSON response
 type Response struct {
+	*mux.Router
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 	Items   []Item `json:"data"`
@@ -46,6 +49,13 @@ type Response struct {
 		return config, nil
 	}
 */
+func NewServer() *Response {
+	i := &Item{
+		Router: mux.NewRouter(),
+		songs:  []Item{},
+	}
+	return i
+}
 func main() {
 
 	fileServer := http.FileServer(http.Dir("www/"))
