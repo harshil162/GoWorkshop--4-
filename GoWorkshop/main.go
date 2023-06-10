@@ -7,11 +7,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	//"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/sheets/v4"
 )
@@ -26,29 +28,28 @@ type Response struct {
 	Items   []Item `json:"data"`
 }
 
-/*
-	func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...string) (*oauth2.Config, error) {
-		// Read the service account credentials file
-		credentialsFile, err := os.Open(credentialsPath)
-		if err != nil {
-			return nil, fmt.Errorf("failed to open credentials file: %v", err)
-		}
-		defer credentialsFile.Close()
-
-		// Parse the JSON credentials file
-		credentialsJSON, err := ioutil.ReadAll(credentialsFile)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read credentials file: %v", err)
-		}
-
-		// Create a Config from the JSON credentials
-		config, err := google.ConfigFromJSON(credentialsJSON, scopes...)
-		if err != nil {
-			return nil, fmt.Errorf("failed to parse credentials: %v", err)
-		}
-		return config, nil
+func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...string) (*oauth2.Config, error) {
+	// Read the service account credentials file
+	credentialsFile, err := os.Open(credentialsPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open credentials file: %v", err)
 	}
-*/
+	defer credentialsFile.Close()
+
+	// Parse the JSON credentials file
+	credentialsJSON, err := ioutil.ReadAll(credentialsFile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read credentials file: %v", err)
+	}
+
+	// Create a Config from the JSON credentials
+	config, err := google.ConfigFromJSON(credentialsJSON, scopes...)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse credentials: %v", err)
+	}
+	return config, nil
+}
+
 /*func NewServer() *Response {
 	i := &Item{
 		Router: mux.NewRouter(),
@@ -56,6 +57,7 @@ type Response struct {
 	}
 	return i
 }*/
+
 func main() {
 
 	fileServer := http.FileServer(http.Dir("www/"))
@@ -151,6 +153,7 @@ func startUpdateTimer() {
 		}
 	}()
 }
+
 func getSong(client *http.Client, spreadsheetID, sheetName string) {
 	//Create a new Google Sheets service
 
