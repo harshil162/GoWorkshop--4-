@@ -49,19 +49,19 @@ type Response struct {
 		return config, nil
 	}
 */
-func NewServer() *Response {
+/*func NewServer() *Response {
 	i := &Item{
 		Router: mux.NewRouter(),
 		songs:  []Item{},
 	}
 	return i
-}
+}*/
 func main() {
 
 	fileServer := http.FileServer(http.Dir("www/"))
 	http.HandleFunc("/", fileServer.ServeHTTP)
 	http.HandleFunc("/Items", getItemsHandler)
-	http.ListenAndServe(":8080", nil)
+	log.Println(http.ListenAndServe(":8080", nil))
 	// Replace with the path to your service account credentials JSON file (to-do)
 	credentialsPath := "/path/to/service_account_credentials.json"
 
