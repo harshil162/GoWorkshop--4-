@@ -1,3 +1,5 @@
+import React from 'react';
+import './index.css'
 function update() {
     $.getJSON('/Items', function (data) {
         const table = $("#tablebody-items");

@@ -154,8 +154,21 @@ func startUpdateTimer() {
 	}()
 }
 
-func getSong(client *http.Client, spreadsheetID, sheetName string) {
-	//Create a new Google Sheets service
+func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interface{}, error) {
+	// Create a new Sheets service client
+	srv, err := sheets.New(client)
+	if err != nil {
+		return nil, fmt.Errorf("unable to create Sheets client: %v", err)
+	}
 
-	//Construct the range for retrieving the data from the sheet
+	// Define the range to read from (assuming all columns)
+	readRange := fmt.Sprintf("%s!A:Z", sheetName)
+
+	// Make the request to retrieve the data
+	resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
+	if err != nil {
+		return nil, fmt.Errorf("unable to retrieve data from sheet: %v", err)
+	}
+
+	return resp.Values, nil
 }
