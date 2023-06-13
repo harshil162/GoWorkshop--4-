@@ -1,21 +1,22 @@
-//import logo from './logo.svg';
+import music from './music.png';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={music} className="App-logo" alt="music" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to my Music Downloader App.
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          //href="https://reactjs.org"
+          href="localhost:3001"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Use This App
         </a>
       </header>
     </div>
