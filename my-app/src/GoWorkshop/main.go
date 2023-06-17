@@ -16,7 +16,8 @@ import (
 	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
-	"google.golang.org/api/option"
+
+	//"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 )
 
@@ -155,7 +156,8 @@ func startUpdateTimer() {
 		}
 	}()
 }
-func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interface{}, error) {
+
+/*func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interface{}, error) {
 	// Create a new Sheets service client
 	srv, err := sheets.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
@@ -172,4 +174,4 @@ func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interfac
 	}
 
 	return resp.Values, nil
-}
+}*/
