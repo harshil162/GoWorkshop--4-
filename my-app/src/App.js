@@ -1,6 +1,6 @@
 import music from './music.png';
 import './App.css';
-
+import "./searchBar.js"
 function App() {
   return (
     <div className="App">
@@ -12,7 +12,7 @@ function App() {
         <a
           className="App-link"
           //href="https://reactjs.org"
-          href="localhost:3001"
+          href="localhost:3000"
           target="_blank"
           rel="noopener noreferrer"
         >

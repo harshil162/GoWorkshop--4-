@@ -8,13 +8,15 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
+
+	//"strconv"
 	"time"
 
 	//"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 )
 
@@ -119,7 +121,7 @@ func main() {
 	}*/
 	startUpdateTimer()
 
-	log.Println(http.ListenAndServe(":"+strconv.Itoa(3000), nil))
+	//log.Println(http.ListenAndServe(":"+strconv.Itoa(localhost:3000), nil))
 	//Start the HTTP server on localhost:8080
 	//log.Println("Server is running on port 8080")
 	//log.Println(http.ListenAndServe(":8080", nil))
@@ -153,12 +155,11 @@ func startUpdateTimer() {
 		}
 	}()
 }
-
 func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interface{}, error) {
 	// Create a new Sheets service client
-	srv, err := sheets.New(client)
+	srv, err := sheets.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
-		return nil, fmt.Errorf("unable to create Sheets client: %v", err)
+		return nil, fmt.Errorf("unable to create Sheets service client: %v", err)
 	}
 
 	// Define the range to read from (assuming all columns)
