@@ -1,7 +1,10 @@
-import React, {useState} from 'react'
+import {useState, useEffect} from react;
+import TextField from "@mui/material/TextField";
+/*import Package from "../package-lock.json"
 const searchBar = () => {}
-const [searchInput, setSearchInput] = useState("")
+const [searchInput, setSearchInput] = useState("")*/
 //Implementation here
+
 function App(){
     const [inputText, setInputText] = useState;
     let inputHandler = (e) => {
@@ -10,14 +13,15 @@ function App(){
         setInputText(lowerCase);
     };
     return (
-        <><div className="search">
+        <div className="search">
             <TextField
                 id="outlined-basic"
                 onChange={inputHandler}
                 variant="outlined"
                 fullWidth
-                label="Search" />
-        </div><List input={inputText} /></>
+                label="Search"/>
+        </div>
     );
 }
 export default App;
+//<List input={inputText}></List>
