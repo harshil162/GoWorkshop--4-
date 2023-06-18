@@ -125,7 +125,7 @@ func main() {
 	//log.Println(http.ListenAndServe(":"+strconv.Itoa(localhost:3000), nil))
 	//Start the HTTP server on localhost:8080
 	//log.Println("Server is running on port 8080")
-	//log.Println(http.ListenAndServe(":8080", nil))
+	log.Println(http.ListenAndServe(":3000", nil))
 }
 
 func jsonResponse(w http.ResponseWriter, x interface{}) {
