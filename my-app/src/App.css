@@ -28,6 +28,22 @@
   color: #61dafb;
 }
 
+.searchbox {
+  width: 25%;
+  float:left;
+}
+.searchbox button {
+  padding:8px;
+  margin-top:10px;
+  margin-left:10px;
+  background:gray;
+  font-size:20px;
+  border:none;
+  cursor:pointer;
+}
+.searchbox button:hover {
+  background:darkgray;
+}
 /*@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
