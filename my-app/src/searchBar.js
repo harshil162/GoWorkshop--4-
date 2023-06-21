@@ -1,5 +1,5 @@
+import TextField from "@material-ui/core/TextField";
 import {React, useState} from "react";
-import TextField from "@mui/material/TextField";
 import "./App.css"
 /*import Package from "../package-lock.json"
 const searchBar = () => {}
@@ -24,6 +24,9 @@ function App(){
                 label="Search"/>
             </div>
             input={inputText}
+            <form>
+                <button type="Submit">Submit</button>
+            </form>
         </div>
     );
 }
