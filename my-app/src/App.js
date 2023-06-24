@@ -1,26 +1,16 @@
-import music from './music.png';
-import './App.css';
-import "./searchBar.js"
-function App() {
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainMenu from "./pages/MainMenu";
+import SongMenu from "./pages/SongMenu";
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={music} className="App-logo" alt="music" />
-        <p>
-          Welcome to my Music Downloader App.
-        </p>
-        <a
-          className="App-link"
-          //href="https://reactjs.org"
-          href="localhost:3000"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Use This App
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<MainMenu />}/>
+        <Route path="songmenu" element={<SongMenu />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

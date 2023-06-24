@@ -1,6 +1,6 @@
 import TextField from "@material-ui/core/TextField";
 import {React, useState} from "react";
-import "./App.css"
+import "./pages/App.css"
 /*import Package from "../package-lock.json"
 const searchBar = () => {}
 const [searchInput, setSearchInput] = useState("")*/
