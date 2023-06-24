@@ -2,7 +2,7 @@ import React from 'react';
 const SongMenu = () => {
     return (
         <div className="App" >
-        Hello world I am the song Menu
+        Song Menu
         </div>
     )
 }
