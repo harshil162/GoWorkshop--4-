@@ -13,11 +13,12 @@ import (
 	"time"
 
 	//"github.com/google/uuid"
-	"github.com/gorilla/mux"
+	//"github.com/gorilla/mux"
+	//"golang.org/x/oauth2"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 
-	//"google.golang.org/api/option"
+	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 )
 
@@ -25,7 +26,7 @@ var items []Item
 
 // Struct for JSON response
 type Response struct {
-	*mux.Router
+	//*mux.Router
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 	Items   []Item `json:"data"`
@@ -53,17 +54,68 @@ func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...
 	return config, nil
 }
 
-/*func NewServer() *Response {
-	i := &Item{
-		Router: mux.NewRouter(),
-		songs:  []Item{},
+/*
+	func NewServer() *Response {
+		i := &Item{
+			Router: mux.NewRouter(),
+			songs:  []Item{},
+		}
+		return i
 	}
-	return i
-}*/
-
+*/
+func searchSong(songName string) (bool, error) {
+	//Create a context and read the credentials file
+	ctx := context.Background()
+	creds, err := google.FindDefaultCredentials(ctx, sheets.SpreadsheetsScope)
+	if err != nil {
+		return false, err
+	}
+	//Create a new Sheets client using the credentials
+	client, err := sheets.NewService(ctx, option.WithCredentials(creds))
+	if err != nil {
+		return false, err
+	}
+	//Specify the spreadsheet ID and range
+	spreadsheetID := "1Ffs21UxsHPnvwM4l-wHdPxphKcm6usWWZMOyoGx8WjA/edit#gid=0"
+	readRange := "MusicDownloaderSheet!A1:E6"
+	//Make the API call to read the data from the sheet
+	resp, err := client.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
+	if err != nil {
+		return false, err
+	}
+	for _, row := range resp.Values {
+		if len(row) > 0 && row[0] == songName {
+			return true, nil
+		}
+	}
+	return false, nil
+}
+func searchHandler(w http.ResponseWriter, r *http.Request) {
+	// Get the search query from the request
+	query := r.FormValue("search")
+	// Perform the search
+	found, err := searchSong(query)
+	if err != nil {
+		log.Printf("Search error: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	// Display the results on the website
+	if found {
+		fmt.Fprint(w, "Song Found!")
+	} else {
+		fmt.Fprint(w, "No Results")
+	}
+}
 func main() {
+	// Set up routes
+	http.HandleFunc("/search", searchHandler)
 
-	fileServer := http.FileServer(http.Dir("www/"))
+	// Start the server
+	log.Println("Server started on port 3000")
+	log.Fatal(http.ListenAndServe(":3000", nil))
+
+	/*fileServer := http.FileServer(http.Dir("www/"))
 	http.HandleFunc("/", fileServer.ServeHTTP)
 	http.HandleFunc("/Items", getItemsHandler)
 	log.Println(http.ListenAndServe(":3000", nil))
@@ -156,22 +208,3 @@ func startUpdateTimer() {
 		}
 	}()
 }
-
-/*func getSong(client *http.Client, spreadsheetID, sheetName string) ([][]interface{}, error) {
-	// Create a new Sheets service client
-	srv, err := sheets.NewService(context.Background(), option.WithHTTPClient(client))
-	if err != nil {
-		return nil, fmt.Errorf("unable to create Sheets service client: %v", err)
-	}
-
-	// Define the range to read from (assuming all columns)
-	readRange := fmt.Sprintf("%s!A:Z", sheetName)
-
-	// Make the request to retrieve the data
-	resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
-	if err != nil {
-		return nil, fmt.Errorf("unable to retrieve data from sheet: %v", err)
-	}
-
-	return resp.Values, nil
-}*/
