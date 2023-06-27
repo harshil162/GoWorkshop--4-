@@ -6,7 +6,7 @@ const searchBar = () => {}
 const [searchInput, setSearchInput] = useState("")*/
 //Implementation here
 
-function App(){
+export function App(){
     const [inputText, setInputText] = useState;
     let inputHandler = (e) => {
         //convert input text to lower case
