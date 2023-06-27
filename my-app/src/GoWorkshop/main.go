@@ -10,7 +10,7 @@ import (
 	"os"
 
 	//"strconv"
-	"time"
+	//"time"
 
 	//"github.com/google/uuid"
 	//"github.com/gorilla/mux"
@@ -113,7 +113,7 @@ func main() {
 
 	// Start the server
 	log.Println("Server started on port 3000")
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	//log.Fatal(http.ListenAndServe(":3000", nil))
 
 	/*fileServer := http.FileServer(http.Dir("www/"))
 	http.HandleFunc("/", fileServer.ServeHTTP)
@@ -172,7 +172,7 @@ func main() {
 			fmt.Println()
 		}
 	}*/
-	startUpdateTimer()
+	//startUpdateTimer()
 
 	//log.Println(http.ListenAndServe(":"+strconv.Itoa(localhost:3000), nil))
 	//Start the HTTP server on localhost:8080
@@ -180,7 +180,7 @@ func main() {
 	log.Println(http.ListenAndServe(":3000", nil))
 }
 
-func jsonResponse(w http.ResponseWriter, x interface{}) {
+func jsonResponse(w *http.ResponseWriter, x *interface{}) {
 	bytes, err := json.Marshal(x)
 	if err != nil {
 		log.Println(err)
@@ -191,11 +191,11 @@ func jsonResponse(w http.ResponseWriter, x interface{}) {
 	_, _ = w.Write(bytes)
 }
 
-func getItemsHandler(w http.ResponseWriter, _ *http.Request) {
+func getItemsHandler(w *http.ResponseWriter, _ *http.Request) {
 	jsonResponse(w, items)
 }
 
-func startUpdateTimer() {
+/*func startUpdateTimer() {
 	ticker := time.NewTicker(2 * time.Second)
 	go func() {
 		for {
@@ -207,4 +207,4 @@ func startUpdateTimer() {
 			items = getItems()
 		}
 	}()
-}
+}*/
