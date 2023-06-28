@@ -180,7 +180,7 @@ func main() {
 	log.Println(http.ListenAndServe(":3000", nil))
 }
 
-func jsonResponse(w *http.ResponseWriter, x *interface{}) {
+func jsonResponse(w http.ResponseWriter, x interface{}) {
 	bytes, err := json.Marshal(x)
 	if err != nil {
 		log.Println(err)
@@ -191,8 +191,8 @@ func jsonResponse(w *http.ResponseWriter, x *interface{}) {
 	_, _ = w.Write(bytes)
 }
 
-func getItemsHandler(w *http.ResponseWriter, _ *http.Request) {
-	jsonResponse(w, items)
+func getItemsHandler(w http.ResponseWriter, _ *http.Request) {
+	jsonResponse(w, &items)
 }
 
 /*func startUpdateTimer() {

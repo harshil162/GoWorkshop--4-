@@ -30,5 +30,3 @@ export function App(){
         </div>
     );
 }
-export default App;
-//<List input={inputText}></List>

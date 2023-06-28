@@ -3,7 +3,8 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"log"
+
+	//"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -61,7 +62,7 @@ func Get(target interface{}) error {
 	return json.NewDecoder(resp.Body).Decode(target)
 }
 
-func getItems() []Item {
+/*func getItems() []Item {
 	var sheet Sheet
 	err := Get(&sheet)
 	if err != nil {
@@ -69,4 +70,4 @@ func getItems() []Item {
 	}
 
 	return sheet.Items
-}
+}*/
