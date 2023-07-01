@@ -2,9 +2,9 @@ package main
 
 import (
 	//"context"
-	"encoding/json"
+	//"encoding/json"
+	"encoding/csv"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -19,7 +19,7 @@ import (
 	//"google.golang.org/api/sheets/v4"
 )
 
-var items []Item
+//var items []Item
 
 type Item struct {
 	Name      string `json:"name"`
@@ -30,12 +30,12 @@ type Item struct {
 }
 
 // Struct for JSON response
-type Response struct {
+/*type Response struct {
 	//*mux.Router
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 	Items   []Item `json:"data"`
-}
+}*/
 
 /*func CredentialsFromFile(ctx context.Context, credentialsPath string, scopes ...string) (*oauth2.Config, error) {
 	// Read the service account credentials file
@@ -100,31 +100,24 @@ type Response struct {
 func doGet(query string) {
 	panic("unimplemented")
 }*/
+func readCSVFile(filePath string) [][]string {
+	f, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal("Unable to read input file "+filePath, err)
+	}
+	defer f.Close()
+
+	csvReader := csv.NewReader(f)
+	records, err := csvReader.ReadAll()
+	if err != nil {
+		log.Fatal("Unable to parse file as CSV for "+filePath, err)
+	}
+
+	return records
+}
 func main() {
-	// Read the returned response
-	url := "https://script.google.com/macros/s/AKfycbzGNTp1p90gbdf1yJPmpNrnh_s5_VhQp7wzpcy4hWYsDIKfMOOYuNzvhzubd6nUWIWiMQ"
-	resp, err := http.Get(url)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer resp.Body.Close()
-
-	// Read the body of the response
-	htmlData, err := ioutil.ReadAll(resp.Body)
-
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	// print out
-	fmt.Println(string(htmlData)) // The data is returned as []byte, so string required to display it correctly
-
-	// Unmarshall the returned []byte into json
-	var items []Item
-	json.Unmarshal([]byte(htmlData), &items)
-	fmt.Printf("id: %v, description: %s", items[0].Available, items[0].Name)
+	records := readCSVFile("../MusicSheet.csv")
+	fmt.Println(records)
 	log.Println(http.ListenAndServe(":3000", nil))
 }
 
