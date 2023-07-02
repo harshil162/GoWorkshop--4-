@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainMenu from "../pages/MainMenu";
-import SongMenu from "../pages/SongMenu";
-import Search from "../pages/searchBar.jsx";
-import "../pages/App.css";
+import MainMenu from "./pages/MainMenu";
+import SongMenu from "./pages/SongMenu";
+import Search from "./pages/searchBar.jsx";
+import "./src/pages/App.css";
 
 export default function App() {
   return (

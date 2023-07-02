@@ -1,6 +1,6 @@
 import React from 'react';
-import './pages/App.css';
-import {Search} from "./pages/searchBar.jsx"
+import './App.css';
+//import {Search} from "./pages/searchBar.jsx"
 const Menu = () => {
     return (
         <form className="new-song-form">
@@ -9,8 +9,8 @@ const Menu = () => {
             </div>
             
         </form>
-        Search();
+        
     );
 };
-
+//Search();
 export default Menu;
