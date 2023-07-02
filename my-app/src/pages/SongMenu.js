@@ -1,11 +1,15 @@
 import React from 'react';
-import './App.css';
-//import Bar from ".././searchBar.jsx"
+import './pages/App.css';
+import {Search} from "./pages/searchBar.jsx"
 const Menu = () => {
     return (
-        <div className="App" >
-        Song Menu
-        </div>
+        <form className="new-song-form">
+            <div className="App" >
+                Song Menu
+            </div>
+            
+        </form>
+        Search();
     );
 };
 
