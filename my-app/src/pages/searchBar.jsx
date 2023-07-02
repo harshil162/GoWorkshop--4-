@@ -4,9 +4,9 @@ import "./pages/App.css"
 /*import Package from "../package-lock.json"
 const searchBar = () => {}
 const [searchInput, setSearchInput] = useState("")*/
-//Implementation here
 
-export function App(){
+//Implementation here
+const Search = function(){
     const [inputText, setInputText] = useState;
     let inputHandler = (e) => {
         //convert input text to lower case
@@ -30,3 +30,4 @@ export function App(){
         </div>
     );
 }
+export default Search;

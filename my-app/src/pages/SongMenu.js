@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {App} from ".././searchBar.jsx"
-const Component = () => {
+//import Bar from ".././searchBar.jsx"
+const Menu = () => {
     return (
         <div className="App" >
         Song Menu
@@ -9,4 +9,4 @@ const Component = () => {
     );
 };
 
-export default SongMenu;
+export default Menu;

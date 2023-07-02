@@ -1,7 +1,7 @@
 import React from 'react';
 import music from '.././music.png';
 import './App.css';
-import ".././searchBar.js"
+import "./searchBar.jsx"
  
 import { Outlet, Link } from "react-router-dom";
 
