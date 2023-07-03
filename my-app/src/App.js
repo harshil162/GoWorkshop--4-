@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainMenu from "./pages/MainMenu";
 import SongMenu from "./pages/SongMenu";
 import Search from "./pages/searchBar.jsx";
-import "./src/pages/App.css";
+import "./pages/App.css";
 
 export default function App() {
   return (
