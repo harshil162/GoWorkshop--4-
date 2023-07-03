@@ -1,33 +1,19 @@
-import TextField from "@material-ui/core/TextField";
-import {React, useState} from "react";
-import "./App.css"
+//import TextField from "@material-ui/core/TextField";
+import React from "react";
+import "./searchBar.css"
 /*import Package from "../package-lock.json"
 const searchBar = () => {}
 const [searchInput, setSearchInput] = useState("")*/
 
 //Implementation here
-const Search = function(){
-    const [inputText, setInputText] = useState;
-    let inputHandler = (e) => {
-        //convert input text to lower case
-        var lowerCase = e.target.value.toLowerCase();
-        setInputText(lowerCase);
-    };
+function Search({placeholder, data}){
     return (
-        <div className="main">
-            <div className="search">
-            <TextField
-                id="outlined-basic"
-                onChange={inputHandler}
-                variant="outlined"
-                fullWidth
-                label="Search"/>
-            </div>
-            input={inputText}
-            <form>
-                <button type="Submit">Submit</button>
-            </form>
+        <div className="search">
+            <div className="searchInputs"></div>
+                <input type="text" placeholder={placeholder}/>
+                <div className="searchIcon"></div>
+            <div className="dataResult"></div>
         </div>
-    );
+    )
 }
 export default Search;
