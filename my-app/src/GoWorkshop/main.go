@@ -6,7 +6,8 @@ import (
 	"encoding/csv"
 	"fmt"
 	"log"
-	"net/http"
+
+	//"net/http"
 	"os"
 	//"strconv"
 	//"time"
@@ -27,6 +28,27 @@ type Item struct {
 	Year      uint   `json:"year"`
 	Genre     string `json:"genre"`
 	Available bool   `json:"available"`
+}
+
+func readCSVFile(filePath string) [][]string {
+	f, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal("Unable to read input file "+filePath, err)
+	}
+	defer f.Close()
+
+	csvReader := csv.NewReader(f)
+	records, err := csvReader.ReadAll()
+	if err != nil {
+		log.Fatal("Unable to parse file as CSV for "+filePath, err)
+	}
+
+	return records
+}
+
+func main() {
+	records := readCSVFile("./MusicSheet.csv")
+	fmt.Println(records)
 }
 
 // Struct for JSON response
@@ -97,9 +119,6 @@ type Item struct {
 	}
 }
 
-func doGet(query string) {
-	panic("unimplemented")
-}*/
 func readCSVFile(filePath string) [][]string {
 	f, err := os.Open(filePath)
 	if err != nil {
