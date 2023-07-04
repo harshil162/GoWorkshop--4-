@@ -3,9 +3,12 @@ package main
 import (
 	//"context"
 	//"encoding/json"
-	"encoding/csv"
+	//"encoding/csv"
 	"fmt"
 	"log"
+
+	"github.com/go-gota/gota/dataframe"
+	"github.com/go-gota/gota/series"
 
 	//"net/http"
 	"os"
@@ -30,7 +33,7 @@ type Item struct {
 	Available bool   `json:"available"`
 }
 
-func readCSVFile(filePath string) [][]string {
+/*func readCSVFile(filePath string) [][]string {
 	f, err := os.Open(filePath)
 	if err != nil {
 		log.Fatal("Unable to read input file "+filePath, err)
@@ -44,11 +47,17 @@ func readCSVFile(filePath string) [][]string {
 	}
 
 	return records
-}
+}*/
 
 func main() {
-	records := readCSVFile("./MusicSheet.csv")
-	fmt.Println(records)
+	//records := readCSVFile("./src/pages/MusicSheet.csv")
+	file, err := os.OpenFile(".././MusicSheet.csv", os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		log.Panic(err)
+	}
+	df := dataframe.ReadCSV(file)
+	filter := df.Filter(dataframe.F{Colname: "price", Comparator: series.Greater, Comparando: 5000})
+	fmt.Println(filter)
 }
 
 // Struct for JSON response
