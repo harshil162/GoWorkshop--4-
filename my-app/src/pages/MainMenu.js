@@ -11,7 +11,7 @@ function MainMenu() {
       <header className="App-header">
         <img src={music} className="App-logo" alt="music" />
         <p>
-          Welcome to my Music Downloader App.
+          Welcome to my Music Accessor App.
         </p>
         {/* <a
           className="App-link"
