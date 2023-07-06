@@ -52,5 +52,131 @@
         "available": "yes",
         "link": "https://www.youtube.com/watch?v=IjTXaSRq3hA"
         
-      }        
+      },
+      {
+        "song": "Step on Up",
+        "artist": "Ariana Grande",
+        "year": 2016,
+        "genre": "Pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=2jqWhI6xqv8"
+        
+      }, 
+      {
+        "song": "Midnight Rain",
+        "artist": "Taylor Swift",
+        "year": 2022,
+        "genre": "Pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=EL72UcDZLSk"
+        
+      },  
+      {
+        "song": "Hare Hare",
+        "artist": "Twice",
+        "year": 2023,
+        "genre": "J-Pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=tNLD0yUNaOg"
+        
+      },  
+      {
+        "song": "ESPRESSO",
+        "artist": "Twice",
+        "year": 2021,
+        "genre": "K-Pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=kFudXy6hma8"
+        
+      },  
+      {
+        "song": "Party Toh Banti Hai",
+        "artist": "Mika Singh",
+        "year": 2014,
+        "genre": "Indian pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=l_3C4JT7N0c"
+        
+      },  
+      {
+        "song": "Feel the Fiyaaaah",
+        "artist": "ASAP Rocky",
+        "year": 2022,
+        "genre": "Rap",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=35V_5zP4vQk"
+        
+      },         
+      {
+        "song": "Princess of China",
+        "artist": "Coldplay, Rihanna",
+        "year": 2011,
+        "genre": "UK R&B",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=TDj3sorWXbE"
+        
+      },  
+      {
+        "song": "E.T",
+        "artist": "Katy Perry",
+        "year": 2010,
+        "genre": "Pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=18oYGsmUprM"
+        
+      },  
+      {
+        "song": "Hot N Cold",
+        "artist": "Katy Perry",
+        "year": 2008,
+        "genre": "Indie/Rock",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=LG558yBrNfk"
+        
+      },  
+      {
+        "song": "On BS",
+        "artist": "Drake, 21 Savage",
+        "year": 2022,
+        "genre": "Rap",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=PNFZHl1H8zY"
+        
+      },  
+      {
+        "song": "NO PROBLEM",
+        "artist": "Nayeon",
+        "year": 2022,
+        "genre": "Dance/Electronic",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=9oelHREj8iI"
+        
+      },  
+      {
+        "song": "Apocalypse",
+        "artist": "Cigarettes After Sex",
+        "year": 2017,
+        "genre": "Indie",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=sElE_BfQ67s"
+        
+      },  
+      {
+        "song": "Dehkte Dehkte",
+        "artist": "Atif Aslam",
+        "year": 2018,
+        "genre": "Indian pop",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=N1g1-wQP_ZM"
+        
+      },  
+      {
+        "song": "Wild For the Night",
+        "artist": "ASAP Rocky",
+        "year": 2013,
+        "genre": "Hip-hop/Rap",
+        "available": "yes",
+        "link": "https://www.youtube.com/watch?v=FK91w16eJ48"
+        
+      }
 ]
