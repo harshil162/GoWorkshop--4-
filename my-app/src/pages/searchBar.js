@@ -11,15 +11,15 @@ const [searchInput, setSearchInput] = useState("")*/
 //Implementation here
 function Search({placeholder, data}){
     const [filteredData, setFilteredData] = useState([]); //constant states
-    const [wordEntered, setWordEntered] = useState("");  //constant states
+    const [nameEntered, setNameEntered] = useState("");  //constant states
     const handleFilter = (event) => {
-        const searchWord = event.target.value;  //word that user is trying to search for
-        setWordEntered(searchWord);
+        const searchSong = event.target.value;  //word that user is trying to search for
+        setNameEntered(searchSong);
         const newFilter = data.filter((value) => {
-            return value.title.toLowerCase().includes(searchWord.toLowerCase());
+            return value.title.toLowerCase().includes(searchSong.toLowerCase());
         });
 
-        if (searchWord === ""){
+        if (searchSong === ""){
             setFilteredData([]);
         } else {
             setFilteredData(newFilter);
@@ -27,12 +27,12 @@ function Search({placeholder, data}){
     };
     const clearInput = () => {
         setFilteredData([]);
-        setWordEntered("");
+        setNameEntered("");
     }
     return (
         <div className="search">
             <div className="searchInputs">
-                <input type="text" placeholder={placeholder} value={wordEntered} onChange={handleFilter}/>
+                <input type="text" placeholder={placeholder} value={nameEntered} onChange={handleFilter}/>
                 <div className="SearchIcon">
                     {filteredData.length === 0 ? (
                         <SearchIcon />
