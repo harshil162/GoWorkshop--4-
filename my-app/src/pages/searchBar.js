@@ -16,7 +16,7 @@ function Search({placeholder, data}){
         const searchSong = event.target.value;  //word that user is trying to search for
         setNameEntered(searchSong);
         const newFilter = data.filter((value) => {
-            return value.title.toLowerCase().includes(searchSong.toLowerCase());
+            return value.song.toLowerCase().includes(searchSong.toLowerCase());
         });
 
         if (searchSong === ""){
