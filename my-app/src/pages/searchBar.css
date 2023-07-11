@@ -1,60 +1,24 @@
-/*Need to modify this a little more*/
-.searchInputs {
-    margin-top: 100px;
-    display:flex;
-}
-.searchIcon {
-    height: 50px;
-    width: 60px;
-    background-color: white;
-    display:grid;
-    place-items: center;
-}
-.search input {
-    background-color: white;
-    border: 0;
-    border-radius: 2px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius:0px;
-    font-size:15px;
-    padding: 15px;
-    height:31px;
-    width:300px;
-}
-.dataResult {
-    margin-top: 6px;
+/*Used following code from stack overflow to assist with this: 
+  https://stackoverflow.com/questions/42781694/aligning-search-box-to-center */
+  #search {
+    width: 350px;
+    margin: 10px auto;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  #search_text {
     width: 300px;
-    height: 200px;
-    background-color:white;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
-    overflow:hidden;
-    overflow-y: auto;
-}
-.dataResult .dataItem {
-    width: 100%;
+    padding: 15px 0 15px 20px;
+    font-size: 15px;
+    font-family: "Georgia", sans-serif;
+    border: 0 none;
     height: 50px;
-    display: flex;
-    align-items:center;
-    color: brown;
-}
-input:focus {
-    outline:none;
-}
-.searchIcon svg {
-    font-size:34px;
-}
-.dataResult::-webkit-scrollbar {
-    display:none;
-}
-.dataItem p {
-    margin-left: 10px;
-}
-a {
-    text-decoration:none;
-}
-a:hover {
-    background-color: mediumaquamarine;
-}
-#clearBtn {
-    cursor:pointer;
-}
+    margin-right: 0;
+    color: white;
+    outline: none;
+    background: #1f7f5c;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.15s;
+  }
